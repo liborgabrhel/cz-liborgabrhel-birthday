@@ -1,6 +1,11 @@
 {
   "name": "birthday-app",
   "version": "2.0.0",
+  "author": {
+    "name": "Libor Gabrhel",
+    "email": "gabrhel.libor@gmail.com",
+    "url": "https://liborgabrhel.cz"
+  },
   "private": true,
   "dependencies": {
     "moment": "^2.24.0",
