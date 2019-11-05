@@ -1,0 +1,20 @@
+parser:  '@typescript-eslint/parser'
+
+extends:
+  - "react-app"
+  - "prettier"
+  - "prettier/@typescript-eslint"
+
+plugins:
+  - "@typescript-eslint"
+  - "react-hooks"
+
+rules:
+  # Checks rules of Hooks
+  react-hooks/rules-of-hooks: "error"
+
+  # Checks effect dependencies
+  react-hooks/exhaustive-deps: "warn"
+
+  no-unused-vars: "off"
+  "@typescript-eslint/no-unused-vars": "error"
