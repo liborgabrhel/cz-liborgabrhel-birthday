@@ -66,7 +66,7 @@ const Container = styled("header")`
   }
 `
 
-export const IconWrapper = styled("div")<{ color?: string }>`
+const IconWrapper = styled("div")<{ color?: string }>`
   grid-area: icon;
   border-bottom: 1px solid ${props => props.color ?? "whitesmoke"};
   width: 100%;
