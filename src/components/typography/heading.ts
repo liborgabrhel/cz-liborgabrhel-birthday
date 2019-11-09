@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const Heading = styled.h1`
   font-family: sans-serif;
@@ -7,4 +7,4 @@ export const Heading = styled.h1`
   letter-spacing: 0.2rem;
   color: whitesmoke;
   margin: 0;
-`;
+`

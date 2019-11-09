@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const Subheading = styled.h2`
   font-family: sans-serif;
@@ -7,4 +7,4 @@ export const Subheading = styled.h2`
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
   padding-left: 0.15rem;
-`;
+`
