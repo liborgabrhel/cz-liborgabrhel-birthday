@@ -11,8 +11,13 @@ type Props = {
 }
 
 export const Dialog: React.FunctionComponent<Props> = () => {
+  const dialog = useSelector((store: ReduxStore) => store.dialog, shallowEqual)
   const currentCelebratedAge = useSelector((store: ReduxStore) => store.celebratedAge.current, shallowEqual)
   const { closeDialog } = useCloseDialog()
+
+  if (!dialog.isActive || !dialog.isVisible) {
+    return null
+  }
 
   return (
     <DialogWindow>

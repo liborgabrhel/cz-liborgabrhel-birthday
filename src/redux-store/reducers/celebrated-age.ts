@@ -1,4 +1,4 @@
-import { CelebratedAgeActionData, celebratedAgeActions } from "actions"
+import { CelebratedAgeActionData, celebratedAgeActions } from "redux-store/actions/celebrated-age"
 import { Action } from "redux-store/types"
 
 /**
@@ -35,7 +35,7 @@ export const celebratedAgeReducer = (
           next: action.data.next,
         }
       } else {
-        console.error(`No data provided!`)
+        console.error(`No data provided for action "updateCelebratedAge"!`)
         return state
       }
     }
