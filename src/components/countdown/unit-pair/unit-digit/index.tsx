@@ -1,26 +1,37 @@
 import { Text } from "components/typography/text"
 import { useEffect, useRef, useState } from "react"
 import React from "react"
-import styled, { keyframes } from "styled-components"
+import { useSpring, animated, config } from "react-spring"
+import styled from "styled-components"
 
 type Props = {
   children: number
 }
 
 export const UnitDigit: React.FunctionComponent<Props> = ({ children }) => {
-  const previousChildren = usePrevious(children)
-  const [shuffle, setShuffle] = useState(true)
-  const [previousDigit, setPreviousDigit] = useState(0)
   const [currentDigit, setCurrentDigit] = useState(0)
+  const previousDigit = usePrevious(currentDigit)
 
   useEffect(() => {
-    setShuffle(state => !state)
-    setPreviousDigit(previousChildren)
     setCurrentDigit(children)
   }, [children])
 
-  const digit1 = shuffle ? previousDigit : currentDigit
-  const digit2 = shuffle ? currentDigit : previousDigit
+  const ANIMATION_CONFIG = config.slow
+  const IS_RESET_ACTIVE = previousDigit !== currentDigit
+
+  const frontCardProps = useSpring({
+    from: { transform: "rotateX(0deg)" },
+    to: { transform: "rotateX(-180deg)" },
+    config: ANIMATION_CONFIG,
+    reset: IS_RESET_ACTIVE,
+  })
+
+  const backCardProps = useSpring({
+    from: { transform: "rotateX(180deg)" },
+    to: { transform: "rotateX(0deg)" },
+    config: ANIMATION_CONFIG,
+    reset: IS_RESET_ACTIVE,
+  })
 
   return (
     <UnitDigitContainer>
@@ -32,13 +43,13 @@ export const UnitDigit: React.FunctionComponent<Props> = ({ children }) => {
         <LowerDigit>{previousDigit}</LowerDigit>
       </StaticLowerCard>
 
-      <AnimatedCard reversed={!shuffle}>
-        <AnimatedCardDigit reversed={!shuffle}>{digit1}</AnimatedCardDigit>
-      </AnimatedCard>
+      <AnimatedCardFront style={frontCardProps}>
+        <AnimatedCardDigit reversed={false}>{previousDigit}</AnimatedCardDigit>
+      </AnimatedCardFront>
 
-      <AnimatedCard reversed={shuffle}>
-        <AnimatedCardDigit reversed={shuffle}>{digit2}</AnimatedCardDigit>
-      </AnimatedCard>
+      <AnimatedCardBack style={backCardProps}>
+        <AnimatedCardDigit reversed={true}>{currentDigit}</AnimatedCardDigit>
+      </AnimatedCardBack>
     </UnitDigitContainer>
   )
 }
@@ -94,32 +105,49 @@ const StaticLowerCard = styled(CardContainer)`
   border-bottom-right-radius: 3px;
 `
 
+const AnimatedCardFront = styled(animated.div)`
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  min-width: 160px;
+  height: 60px;
+  overflow: hidden;
+  background-color: white;
+  border: 1px solid ${borderColor};
+  align-items: flex-end;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  transform: rotate3d(0deg);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+`
+
+const AnimatedCardBack = styled(animated.div)`
+  display: flex;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  justify-content: center;
+  min-width: 160px;
+  height: 60px;
+  overflow: hidden;
+  background-color: white;
+  border: 1px solid ${borderColor};
+  align-items: flex-start;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform-origin: 50% 0;
+  transform: rotate3d(180deg);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+`
+
 type AnimatedCardProps = {
   reversed: boolean
 }
-
-const getTopOffset = (props: AnimatedCardProps) => (props.reversed ? "60px" : "0px")
-const getItemsAlignment = (props: AnimatedCardProps) => (props.reversed ? "flex-start" : "flex-end")
-const getTransformOrigin = (props: AnimatedCardProps) => (props.reversed ? "50% 0%" : "50% 100%")
-const getTransformRotation = (props: AnimatedCardProps) => (props.reversed ? "180" : "0")
-const getBorderRadiusPosition = (props: AnimatedCardProps) => (props.reversed ? "bottom" : "top")
-const getAnimationName = (props: AnimatedCardProps) => (props.reversed ? unfold : fold)
-
-const easing = `cubic-bezier(0.455, 0.03, 0.515, 0.955)`
-
-const AnimatedCard = styled(CardContainer)`
-	position: absolute;
-	top: ${getTopOffset};
-	left: 0;
-	align-items: ${getItemsAlignment};
-	backface-visibility: hidden;
-	transform-style: preserve-3d;
-	transform-origin: ${getTransformOrigin};
-	transform: rotateX(${getTransformRotation}deg);
-	border-${getBorderRadiusPosition}-left-radius: 3px;
-	border-${getBorderRadiusPosition}-right-radius: 3px;
-	animation: ${getAnimationName} 0.9s  ${easing} 0s 1 normal forwards;
-`
 
 const Digit = styled(Text)`
   font-family: "Droid Sans Mono", monospace;
@@ -139,22 +167,4 @@ const getDigitPosition = (props: AnimatedCardProps) => (props.reversed ? "-50%" 
 
 const AnimatedCardDigit = styled(Digit)`
   transform: translateY(${getDigitPosition});
-`
-
-const unfold = keyframes`
-	0% {
-		transform: rotateX(180deg);
-	}
-	100% {
-		transform: rotateX(0deg);
-	}
-`
-
-const fold = keyframes`
-	0% {
-		transform: rotateX(0deg);
-	}
-	100% {
-		transform: rotateX(-180deg);
-	}
 `
