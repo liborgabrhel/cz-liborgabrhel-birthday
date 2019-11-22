@@ -33,7 +33,7 @@ export const Dialog: React.FunctionComponent<Props> = () => {
  * Styled components
  */
 
-const DialogWindow = styled.section`
+const DialogWindow = styled("section")`
   display: grid;
   position: fixed;
   grid-template-columns: auto 600px auto;
@@ -68,7 +68,7 @@ const DialogMessage = styled(Text)`
   }
 `
 
-const Button = styled.div`
+const Button = styled("div")`
   position: absolute;
   top: 30px;
   right: 30px;

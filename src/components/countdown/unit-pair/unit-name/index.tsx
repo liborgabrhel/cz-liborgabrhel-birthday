@@ -18,7 +18,7 @@ export const UnitName: React.FunctionComponent<Props> = ({ children }) => {
  * Styled components
  */
 
-const Container = styled.section`
+const Container = styled("section")`
   grid-area: name;
 `
 
