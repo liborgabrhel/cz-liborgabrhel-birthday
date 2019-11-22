@@ -83,4 +83,7 @@ const SubheadingWrapper = styled("div")`
   position: relative;
   grid-area: subheading;
   align-self: start;
+  @media screen and (max-width: 470px) {
+    justify-self: center;
+  }
 `
