@@ -2,7 +2,7 @@
 
 # cz-liborgabrhel-birthday
 
-##Install
+## Install
 ```shell script
 # 1. clone project
 git clone https://github.com/liborgabrhel/cz-liborgabrhel-birthday.git
@@ -15,5 +15,14 @@ yarn
 
 # 4. create .env file with birth variables
 touch .env && echo "REACT_APP_BIRTH_DAY = \"01\"\nREACT_APP_BIRTH_MONTH = \"01\"\nREACT_APP_BIRTH_YEAR = \"2000\"\nREACT_APP_BIRTH_HOUR = \"00\"\nREACT_APP_BIRTH_MINUTE = \"00\"" > .env
+```
 
+## Development
+```shell script
+yarn start
+```
+
+## Build
+```shell script
+yarn build
 ```
