@@ -1,10 +1,11 @@
 import { IconClose } from "components/icons/icon-close"
 import { Text } from "components/typography/text"
-import React from "react"
+import React, { Fragment } from "react"
 import { shallowEqual, useSelector } from "react-redux"
+import { animated, config, useTransition } from "react-spring"
 import { ReduxStore } from "redux-store"
 import { useCloseDialog } from "redux-store/actions/dialog"
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 
 type Props = {
   children?: never
@@ -15,17 +16,30 @@ export const Dialog: React.FunctionComponent<Props> = () => {
   const currentCelebratedAge = useSelector((store: ReduxStore) => store.celebratedAge.current, shallowEqual)
   const { closeDialog } = useCloseDialog()
 
-  if (!dialog.isActive || !dialog.isVisible) {
-    return null
-  }
+  const isDialogVisible = dialog.isActive && dialog.isVisible
+
+  const transition = useTransition(isDialogVisible, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: config.gentle,
+  })
 
   return (
-    <DialogWindow>
-      <Button onClick={closeDialog} title={"Close the notice"}>
-        <IconClose />
-      </Button>
-      <DialogMessage>{`I have just turned ${currentCelebratedAge}!!!`}</DialogMessage>
-    </DialogWindow>
+    <Fragment>
+      {transition.map(
+        ({ item, key, props: style }) =>
+          item && (
+            <DialogWindow key={key} style={style}>
+              <GlobalStyle />
+              <Button onClick={closeDialog} title={"Close the notice"}>
+                <IconClose />
+              </Button>
+              <DialogMessage>{`I have just turned ${currentCelebratedAge}!!!`}</DialogMessage>
+            </DialogWindow>
+          )
+      )}
+    </Fragment>
   )
 }
 
@@ -33,7 +47,7 @@ export const Dialog: React.FunctionComponent<Props> = () => {
  * Styled components
  */
 
-const DialogWindow = styled("section")`
+const DialogWindow = styled(animated.div)`
   display: grid;
   position: fixed;
   grid-template-columns: auto 600px auto;
@@ -44,7 +58,8 @@ const DialogWindow = styled("section")`
     ". . .";
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
 
   @media screen and (max-width: 679px) {
     grid-template-columns: auto 200px auto;
@@ -61,6 +76,7 @@ const DialogMessage = styled(Text)`
   color: whitesmoke;
   cursor: default;
   user-select: none;
+  text-shadow: 1px 1px 3px black;
 
   @media screen and (max-width: 679px) {
     text-align: center;
@@ -75,4 +91,10 @@ const Button = styled("div")`
   width: 30px;
   height: 30px;
   cursor: pointer;
+`
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    overflow: hidden;
+  }
 `
