@@ -24,6 +24,6 @@ const Container = styled("section")`
 
 const Name = styled(Text)`
   font-weight: 400;
-  color: white;
+  color: #333333;
   padding-top: 0.3rem;
 `
