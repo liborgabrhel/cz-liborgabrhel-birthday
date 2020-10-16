@@ -80,7 +80,7 @@ const UnitDigitContainer = styled.section`
   user-select: none;
 `
 
-const borderColor = "whitesmoke"
+const borderColor = "#222222"
 
 const CardContainer = styled.div`
   display: flex;
@@ -89,7 +89,7 @@ const CardContainer = styled.div`
   min-width: 160px;
   height: 60px;
   overflow: hidden;
-  background-color: white;
+  background-color: #333333;
   border: 1px solid ${borderColor};
 `
 
@@ -114,7 +114,7 @@ const AnimatedCardFront = styled(animated.div)`
   min-width: 160px;
   height: 60px;
   overflow: hidden;
-  background-color: white;
+  background-color: #333333;
   border: 1px solid ${borderColor};
   align-items: flex-end;
   backface-visibility: hidden;
@@ -134,7 +134,7 @@ const AnimatedCardBack = styled(animated.div)`
   min-width: 160px;
   height: 60px;
   overflow: hidden;
-  background-color: white;
+  background-color: #333333;
   border: 1px solid ${borderColor};
   align-items: flex-start;
   backface-visibility: hidden;
@@ -152,7 +152,7 @@ type AnimatedCardProps = {
 const Digit = styled(Text)`
   font-family: "Droid Sans Mono", monospace;
   font-size: 77px;
-  color: #333333;
+  color: whitesmoke;
 `
 
 const UpperDigit = styled(Digit)`

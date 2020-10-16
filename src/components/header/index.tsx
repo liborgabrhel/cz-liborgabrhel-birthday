@@ -1,4 +1,3 @@
-import { IconBalloons } from "components/icons/icon-balloons"
 import { Heading } from "components/typography/heading"
 import { Subheading } from "components/typography/subheading"
 import React from "react"
@@ -11,16 +10,16 @@ type Props = {
   children?: never
 }
 
-export const Header: React.FunctionComponent<Props> = () => {
+export const Header = (_props: Props) => {
   const nextCelebratedAge = useSelector((store: ReduxStore) => store.celebratedAge.next)
   const ordinalSuffix = getOrdinalSuffix(nextCelebratedAge)
 
   return (
     <Container>
-      {/* Icon */}
-      <IconWrapper>
-        <IconBalloons />
-      </IconWrapper>
+      {/* Partying Face Emoji */}
+      <EmojiWrapper>
+        <Emoji>{"🥳"}</Emoji>
+      </EmojiWrapper>
 
       {/* Heading */}
       <HeadingWrapper>
@@ -43,32 +42,42 @@ const Container = styled("header")`
   display: grid;
   position: relative;
   justify-items: start;
-  grid-template-columns: auto 140px max-content auto;
-  grid-template-rows: auto 100px 40px auto;
-  grid-column-gap: 10px;
+  grid-template-columns: auto max-content max-content auto;
+  grid-template-rows: auto max-content max-content auto;
+  grid-column-gap: 20px;
   grid-template-areas:
     ". . . ."
-    ". icon heading ."
-    ". icon subheading ."
+    ". emoji heading ."
+    ". emoji subheading ."
     ". . . .";
   grid-area: header;
+  background-color: #4158d0;
+  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
 
   @media screen and (max-width: 470px) {
-    grid-template-columns: auto max-content 100px max-content auto;
-    grid-template-rows: auto 100px 60px 40px auto;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto max-content max-content max-content auto;
     grid-column-gap: 0;
     grid-template-areas:
-      ". . . . ."
-      ". . icon . ."
-      ". heading heading heading ."
-      ". subheading subheading subheading ."
-      ". . . . .";
+      ". . ."
+      ". emoji ."
+      ". heading ."
+      ". subheading ."
+      ". . .";
   }
 `
 
-const IconWrapper = styled("div")<{ color?: string }>`
-  grid-area: icon;
-  border-bottom: 1px solid ${props => (props.color ? props.color : "whitesmoke")};
+const Emoji = styled("span")`
+  font-size: 5.5rem;
+`
+
+const EmojiWrapper = styled("div")<{ color?: string }>`
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  grid-area: emoji;
   width: 100%;
   height: 100%;
 `
@@ -77,6 +86,10 @@ const HeadingWrapper = styled("div")`
   position: relative;
   grid-area: heading;
   align-self: end;
+
+  @media screen and (max-width: 470px) {
+    justify-self: center;
+  }
 `
 
 const SubheadingWrapper = styled("div")`

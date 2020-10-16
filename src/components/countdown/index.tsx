@@ -20,7 +20,7 @@ export const Countdown: React.FunctionComponent<Props> = () => {
 
   const { updateCelebratedAge } = useUpdateCelebratedAge()
   const { updateDialog } = useUpdateDialog()
-  const {updateCountdown} = useUpdateCountdown()
+  const { updateCountdown } = useUpdateCountdown()
 
   useEffect(() => {
     const updateTime = () => {
@@ -81,6 +81,8 @@ export const CountdownContainer = styled("section")`
   @media screen and (max-width: 470px) {
     grid-template-columns: auto 160px auto;
     grid-template-rows: auto 180px 180px 180px 180px auto;
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
     grid-template-areas:
       ". . ."
       ". days ."
