@@ -1,8 +1,8 @@
 import { Countdown } from "components/countdown"
 import { Dialog } from "components/dialog"
 import { Footer } from "components/footer"
+import { GlobalStyle } from "components/global-style"
 import { Header } from "components/header"
-import { GlobalStyle } from "global-styles"
 import React from "react"
 import { Provider as ReduxProvider } from "react-redux"
 import { store } from "redux-store"
@@ -50,7 +50,5 @@ export const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: darkslateblue;
-  background-image: linear-gradient(19deg, magenta 0%, darkslateblue 49%);
   background-attachment: fixed;
 `
