@@ -10,7 +10,7 @@ type Props = {
   children?: never
 }
 
-export const Header: React.FunctionComponent<Props> = () => {
+export const Header = (_props: Props) => {
   const nextCelebratedAge = useSelector((store: ReduxStore) => store.celebratedAge.next)
   const ordinalSuffix = getOrdinalSuffix(nextCelebratedAge)
 
