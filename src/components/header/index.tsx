@@ -4,6 +4,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { ReduxStore } from "redux-store"
 import styled from "styled-components"
+import { theme } from "theme"
 import { getOrdinalSuffix } from "utils"
 
 type Props = {
@@ -51,9 +52,13 @@ const Container = styled("header")`
     ". emoji subheading ."
     ". . . .";
   grid-area: header;
-  background-color: #4158d0;
-  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
   box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
+
+  background-color: ${theme.header.backgroundColor[0]};
+
+  @media (prefers-color-scheme: dark) {
+    background-color: ${theme.header.backgroundColor[1]};
+  }
 
   @media screen and (max-width: 470px) {
     grid-template-columns: auto 1fr auto;
