@@ -6,6 +6,7 @@ import { ReduxStore } from "redux-store"
 import styled from "styled-components"
 import { theme } from "theme"
 import { getOrdinalSuffix } from "utils"
+import partyingFaceEmoji from "assets/images/partying-face-emoji.png"
 
 type Props = {
   children?: never
@@ -19,7 +20,7 @@ export const Header = (_props: Props) => {
     <Container>
       {/* Partying Face Emoji */}
       <EmojiWrapper>
-        <Emoji>{"🥳"}</Emoji>
+        <Emoji src={partyingFaceEmoji} alt={"partying face"} />
       </EmojiWrapper>
 
       {/* Heading */}
@@ -73,8 +74,14 @@ const Container = styled("header")`
   }
 `
 
-const Emoji = styled("span")`
-  font-size: 5.5rem;
+const Emoji = styled("img")`
+  width: 100px;
+  height: 100px;
+
+  @media screen and (max-width: 470px) {
+    width: 80px;
+    height: 80px;
+  }
 `
 
 const EmojiWrapper = styled("div")<{ color?: string }>`
