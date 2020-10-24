@@ -54,7 +54,6 @@ const Container = styled("header")`
     ". . . .";
   grid-area: header;
   box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
-
   background-color: ${theme.header.backgroundColor[0]};
 
   @media (prefers-color-scheme: dark) {
