@@ -1,18 +1,19 @@
 import { Text } from "components/typography/text"
-import React, { Fragment } from "react"
+import React from "react"
 import styled from "styled-components"
+import { theme } from "theme"
 
 type Props = {
   children?: never
 }
 
-export const Footer: React.FunctionComponent<Props> = () => {
+export const Footer = (_props: Props) => {
   return (
     <Container>
       <FooterText>
         {`You can find this project on `}
         <Link href={"https://github.com/liborgabrhel/cz-liborgabrhel-birthday"}>{`GitHub`}</Link>
-        {`!`}
+        {`.`}
       </FooterText>
     </Container>
   )
@@ -28,20 +29,41 @@ const Container = styled("footer")`
   justify-content: center;
   align-items: center;
   grid-area: footer;
+  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
+  background-color: ${theme.footer.backgroundColor[0]};
+
+  @media (prefers-color-scheme: dark) {
+    background-color: ${theme.footer.backgroundColor[1]};
+  }
 `
 
 const FooterText = styled(Text)`
   font-weight: 200;
   font-size: 12px;
-  color: #333333;
   padding-top: 3px;
   margin: 0;
 `
 
 const Link = styled("a")`
-  color: rgba(51, 51, 51, 0.5);
+  color: ${theme.link.fontColor[0]};
 
   &:hover {
-    color: rgba(51, 51, 51, 1);
+    color: ${theme.link.hoverFontColor[0]};
+  }
+
+  &:active {
+    color: ${theme.link.activeFontColor[0]};
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: ${theme.link.fontColor[1]};
+
+    &:hover {
+      color: ${theme.link.hoverFontColor[1]};
+    }
+
+    &:active {
+      color: ${theme.link.activeFontColor[1]};
+    }
   }
 `
