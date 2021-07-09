@@ -8,11 +8,13 @@
   },
   "private": true,
   "dependencies": {
+    "lodash.isempty": "4.4.0",
     "moment": "2.29.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "next": "11.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-redux": "7.2.1",
-    "react-scripts": "4.0.0",
+    "react-scripts": "4.0.0-next.117",
     "react-spring": "8.0.27",
     "styled-components": "5.2.0"
   },
@@ -20,7 +22,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "next:dev": "next dev",
+    "next:build": "next build",
+    "next:start": "next start",
+    "next:lint": "next lint"
   },
   "devDependencies": {
     "@types/node": "14.14.2",
