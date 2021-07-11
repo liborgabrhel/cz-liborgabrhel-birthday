@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import Head from "next/head"
 import { Favicon } from "components/page-head/favicon"
-import isEmpty from "lodash.isempty"
+import { isEmpty } from "lodash"
 
 const SITE_TITLE = "Birthday Countdown"
 

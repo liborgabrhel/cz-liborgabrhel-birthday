@@ -2,17 +2,20 @@ import { Text } from "components/typography/text"
 import React from "react"
 import styled from "styled-components"
 import { theme } from "theme"
+import packageData from "../../../package.json"
 
 type Props = {
   children?: never
 }
 
 export const Footer = (_props: Props) => {
+  const githubUrl = packageData.repository.url
+
   return (
     <Container>
       <FooterText>
         {`You can find this project on `}
-        <Link href={"https://github.com/liborgabrhel/cz-liborgabrhel-birthday"}>{`GitHub`}</Link>
+        <Link href={githubUrl}>{`GitHub`}</Link>
         {`.`}
       </FooterText>
     </Container>

@@ -7,7 +7,7 @@ import { useUpdateCountdown } from "redux-store/actions/countdown"
 import { useUpdateDialog } from "redux-store/actions/dialog"
 import styled from "styled-components"
 import { UnitPair } from "components/countdown/unit-pair"
-import { getBirth, getBirthday, getNextBirthday, getYearOffset } from "utils"
+import { getCelebratedAge, getBirthday, getNextBirthday, getYearOffset } from "utils"
 
 type Props = {
   children?: never
@@ -27,7 +27,7 @@ export const Countdown: React.FunctionComponent<Props> = () => {
       // Current date
       const now = moment.utc()
       // Countdown related dates
-      const birthDate = getBirth(birth)
+      const birthDate = getCelebratedAge(birth)
       const birthdayDate = getBirthday(now.year(), birth)
       const nextBirthdayDate = getNextBirthday(now.year(), getYearOffset(now, birthdayDate), birth)
       // Actions

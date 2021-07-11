@@ -26,6 +26,4 @@ type Props = {
   children: ReactNode
 }
 
-export const Page = ({ children }: Props) => {
-  return <Container>{children}</Container>
-}
+export const PageBody = ({ children }: Props) => <Container>{children}</Container>

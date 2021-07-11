@@ -1,5 +1,5 @@
+import { ReactNode } from "react"
 import styled from "styled-components"
-import { getOrdinalSuffix } from "utils";
 import partyingFaceEmoji from "../../public/images/partying-face-emoji.png"
 import Image from "next/image"
 
@@ -9,12 +9,6 @@ import Image from "next/image"
 
 const theme = {
   backgroundColor: ["#fafafa", "#0a0a0a"],
-  heading: {
-    fontColor: ["#0a0a0a", "#fafafa"],
-  },
-  subheading: {
-    fontColor: ["rgba(10,10,10, 0.6)", "rgba(250,250,250, 0.6)"],
-  },
 }
 
 /**
@@ -25,15 +19,15 @@ const Container = styled("header")`
   display: grid;
   position: relative;
   justify-items: start;
-  grid-template-columns: auto max-content max-content auto;
-  grid-template-rows: auto max-content max-content auto;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: max-content max-content;
   grid-column-gap: 20px;
   grid-template-areas:
-    ". . . ."
-    ". emoji heading ."
-    ". emoji subheading ."
-    ". . . .";
+    "emoji heading"
+    "emoji subheading";
   grid-area: header;
+  align-content: center;
+  justify-content: center;
   box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
   background-color: ${theme.backgroundColor[0]};
   height: 200px;
@@ -43,15 +37,13 @@ const Container = styled("header")`
   }
 
   @media screen and (max-width: 470px) {
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto max-content max-content max-content auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content max-content max-content;
     grid-column-gap: 0;
     grid-template-areas:
-      ". . ."
-      ". emoji ."
-      ". heading ."
-      ". subheading ."
-      ". . .";
+      "emoji"
+      "heading"
+      "subheading";
   }
 `
 
@@ -65,53 +57,9 @@ const EmojiWrapper = styled("div")<{ color?: string }>`
   height: 100px;
 
   @media screen and (max-width: 470px) {
+    justify-self: center;
     width: 80px;
     height: 80px;
-  }
-`
-
-const HeadingWrapper = styled("div")`
-  position: relative;
-  grid-area: heading;
-  align-self: end;
-
-  @media screen and (max-width: 470px) {
-    justify-self: center;
-  }
-`
-
-const Heading = styled("h1")`
-  font-family: sans-serif;
-  font-size: 2.5rem;
-  font-weight: 600;
-  letter-spacing: 0.2rem;
-  margin: 0;
-  color: ${theme.heading.fontColor[0]};
-
-  @media (prefers-color-scheme: dark) {
-    color: ${theme.heading.fontColor[1]};
-  }
-`
-
-const SubheadingWrapper = styled("div")`
-  position: relative;
-  grid-area: subheading;
-  align-self: start;
-  @media screen and (max-width: 470px) {
-    justify-self: center;
-  }
-`
-
-const Subheading = styled("h2")`
-  font-family: sans-serif;
-  font-size: 1rem;
-  font-weight: 200;
-  margin: 0;
-  padding-left: 0.15rem;
-  color: ${theme.subheading.fontColor[0]};
-
-  @media (prefers-color-scheme: dark) {
-    color: ${theme.subheading.fontColor[1]};
   }
 `
 
@@ -120,28 +68,17 @@ const Subheading = styled("h2")`
  */
 
 type Props = {
-  nextCelebratedAge: number
+  children: ReactNode
 }
 
-export const PageHeader = ({ nextCelebratedAge }: Props) => {
-  const ordinalSuffix = getOrdinalSuffix(nextCelebratedAge)
-
+export const PageHeader = ({ children }: Props) => {
   return (
     <Container>
-      {/* Partying Face Emoji */}
       <EmojiWrapper>
         <Image src={partyingFaceEmoji} alt={"partying face"} />
       </EmojiWrapper>
 
-      {/* Heading */}
-      <HeadingWrapper>
-        <Heading>{"Countdown"}</Heading>
-      </HeadingWrapper>
-
-      {/* Subheading */}
-      <SubheadingWrapper>
-        <Subheading>{`to my ${nextCelebratedAge}${ordinalSuffix} birthday`}</Subheading>
-      </SubheadingWrapper>
+      {children}
     </Container>
   )
 }
